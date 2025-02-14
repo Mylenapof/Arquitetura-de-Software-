@@ -1,4 +1,3 @@
-
 public class DependencyInversionViolation {
     public static void main(String[] args) {
         LightBulb bulb = new LightBulb();
@@ -7,7 +6,12 @@ public class DependencyInversionViolation {
     }
 }
 
-class LightBulb {
+interface Switchable {
+    void turnOn();
+    void turnOff();
+}
+
+class LightBulb implements Switchable {
     public void turnOn() {
         System.out.println("LightBulb is ON");
     }
@@ -18,17 +22,17 @@ class LightBulb {
 }
 
 class Switch {
-    private LightBulb bulb;
+    private Switchable device;
 
-    public Switch(LightBulb bulb) {
-        this.bulb = bulb;
+    public Switch(Switchable device) {
+        this.device = device;
     }
 
     public void turnOn() {
-        bulb.turnOn();
+        device.turnOn();
     }
 
     public void turnOff() {
-        bulb.turnOff();
+        device.turnOff();
     }
 }

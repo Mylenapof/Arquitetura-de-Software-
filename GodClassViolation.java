@@ -1,33 +1,58 @@
 
 public class GodClassViolation {
     public static void main(String[] args) {
-        Application app = new Application();
+        Application app = new Application(
+                new Authenticator(),
+                new DashboardLoader(),
+                new PaymentProcessor(),
+                new ReportGenerator()
+        );
         app.run();
     }
 }
 
 class Application {
+    private Authenticator authenticator;
+    private DashboardLoader dashboardLoader;
+    private PaymentProcessor paymentProcessor;
+    private ReportGenerator reportGenerator;
+
+    public Application(Authenticator authenticator, DashboardLoader dashboardLoader, PaymentProcessor paymentProcessor, ReportGenerator reportGenerator) {
+        this.authenticator = authenticator;
+        this.dashboardLoader = dashboardLoader;
+        this.paymentProcessor = paymentProcessor;
+        this.reportGenerator = reportGenerator;
+    }
+
     public void run() {
         System.out.println("Running application...");
-        authenticateUser();
-        loadDashboard();
-        processPayments();
-        generateReports();
+        authenticator.authenticateUser();
+        dashboardLoader.loadDashboard();
+        paymentProcessor.processPayments();
+        reportGenerator.generateReports();
     }
+}
 
-    private void authenticateUser() {
+class Authenticator {
+    public void authenticateUser() {
         System.out.println("Authenticating user...");
     }
+}
 
-    private void loadDashboard() {
+class DashboardLoader {
+    public void loadDashboard() {
         System.out.println("Loading dashboard...");
     }
+}
 
-    private void processPayments() {
+class PaymentProcessor {
+    public void processPayments() {
         System.out.println("Processing payments...");
     }
+}
 
-    private void generateReports() {
+class ReportGenerator {
+    public void generateReports() {
         System.out.println("Generating reports...");
     }
 }

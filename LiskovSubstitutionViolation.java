@@ -1,20 +1,37 @@
 
 public class LiskovSubstitutionViolation {
     public static void main(String[] args) {
-        Bird bird = new Ostrich();
-        bird.fly();
+        Bird sparrow = new Sparrow();
+        sparrow.eat();
+
+        FlyingBird flyingBird = new Sparrow(); // Garantido que pode voar
+        flyingBird.fly();
+
+        Bird ostrich = new Ostrich();
+        ostrich.eat();
     }
 }
+
 
 class Bird {
-    public void fly() {
-        System.out.println("Bird is flying");
+    public void eat() {
+        System.out.println("Bird is eating");
     }
 }
 
-class Ostrich extends Bird {
+interface FlyingBird {
+    void fly();
+}
+
+
+class Sparrow extends Bird implements FlyingBird {
     @Override
     public void fly() {
-        throw new UnsupportedOperationException("Ostriches can't fly");
+        System.out.println("Sparrow is flying");
     }
+}
+
+
+class Ostrich extends Bird {
+
 }

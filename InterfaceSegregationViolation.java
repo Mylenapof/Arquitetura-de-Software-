@@ -1,20 +1,32 @@
 
 public class InterfaceSegregationViolation {
     public static void main(String[] args) {
-        MultiFunctionPrinter printer = new MultiFunctionPrinter();
-        printer.print();
-        printer.scan();
-        printer.fax();
+        MultiFunctionPrinter multiPrinter = new MultiFunctionPrinter();
+        multiPrinter.print();
+        multiPrinter.scan();
+        multiPrinter.fax();
+
+        System.out.println("\nUsing Simple Printer:");
+        SimplePrinter simplePrinter = new SimplePrinter();
+        simplePrinter.print();
     }
 }
 
-interface Machine {
+
+interface Printer {
     void print();
+}
+
+interface Scanner {
     void scan();
+}
+
+interface Fax {
     void fax();
 }
 
-class MultiFunctionPrinter implements Machine {
+
+class MultiFunctionPrinter implements Printer, Scanner, Fax {
     public void print() {
         System.out.println("Printing...");
     }
@@ -25,5 +37,12 @@ class MultiFunctionPrinter implements Machine {
 
     public void fax() {
         System.out.println("Faxing...");
+    }
+}
+
+
+class SimplePrinter implements Printer {
+    public void print() {
+        System.out.println("Printing...");
     }
 }

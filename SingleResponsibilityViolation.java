@@ -2,10 +2,15 @@
 public class SingleResponsibilityViolation {
     public static void main(String[] args) {
         Invoice invoice = new Invoice(1000);
-        invoice.printInvoice();
-        invoice.saveToDatabase();
+
+        InvoicePrinter printer = new InvoicePrinter();
+        printer.print(invoice);
+
+        InvoiceRepository repository = new InvoiceRepository();
+        repository.save(invoice);
     }
 }
+
 
 class Invoice {
     private double amount;
@@ -14,11 +19,21 @@ class Invoice {
         this.amount = amount;
     }
 
-    public void printInvoice() {
-        System.out.println("Invoice amount: " + amount);
+    public double getAmount() {
+        return amount;
     }
+}
 
-    public void saveToDatabase() {
+
+class InvoicePrinter {
+    public void print(Invoice invoice) {
+        System.out.println("Invoice amount: " + invoice.getAmount());
+    }
+}
+
+
+class InvoiceRepository {
+    public void save(Invoice invoice) {
         System.out.println("Saving invoice to database...");
     }
 }

@@ -1,22 +1,36 @@
 
 public class TightCouplingViolation {
     public static void main(String[] args) {
-        Engine engine = new Engine();
+        EngineInterface engine = new PetrolEngine();
         Car car = new Car(engine);
         car.start();
     }
 }
 
-class Engine {
+
+interface EngineInterface {
+    void start();
+}
+
+
+class PetrolEngine implements EngineInterface {
     public void start() {
-        System.out.println("Engine started");
+        System.out.println("Petrol Engine started");
     }
 }
 
-class Car {
-    private Engine engine;
 
-    public Car(Engine engine) {
+class ElectricEngine implements EngineInterface {
+    public void start() {
+        System.out.println("Electric Engine started");
+    }
+}
+
+
+class Car {
+    private EngineInterface engine;
+
+    public Car(EngineInterface engine) {
         this.engine = engine;
     }
 
