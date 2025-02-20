@@ -4,7 +4,7 @@ public class LiskovSubstitutionViolation {
         Bird sparrow = new Sparrow();
         sparrow.eat();
 
-        FlyingBird flyingBird = new Sparrow(); // Garantido que pode voar
+        FlyingBird flyingBird = new Sparrow(); 
         flyingBird.fly();
 
         Bird ostrich = new Ostrich();
